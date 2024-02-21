@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="https://kit.fontawesome.com/7287626084.js" crossorigin="anonymous"></script>
+
+		<title>Calendary Notebook</title>
+	</head>
+
+	<body>
+		<main class="main">
+			<div class="main__month-container">
+				<div class="main__month">
+					<i class="fa-solid fa-arrow-left"></i>
+					<p class="main__name-of-month-and-year"></p>
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+				<div class="main__week">
+					<div class="main__days">
+						<p class="main__week-day">Monday</p>
+						<p class="main__week-day">Tuesday</p>
+						<p class="main__week-day">Wednesday</p>
+						<p class="main__week-day">Thursday</p>
+						<p class="main__week-day">Friday</p>
+						<p class="main__week-day">Saturday</p>
+						<p class="main__week-day">Sunday</p>
+					</div>
+
+					<ul class="main__day-list"></ul>
+				</div>
+			</div>
+		</main>
+
+		<section class="popup display-class">
+			<p class="popup__date-name"></p>
+			<div class="popup__window">
+				<div class="popup__input-container">
+					<input type="text" class="popup__input" />
+					<button class="popup__add-input-btn">Add task</button>
+				</div>
+
+				<!-- <div class="popup__btn-container">
+					<button class="popup__mark-btn btn"><i class="fa-solid fa-check"></i></button>
+					<button class="popup__edit-btn btn"><i class="fa-solid fa-pen"></i></button>
+					<button class="popup__close-btn btn"><i class="fa-solid fa-x"></i></button>
+				</div> -->
+			</div>
+
+			<div class="popup__ul-list"></div>
+		</section>
+
+		<div class="bg-shadow display-class"></div>
+
+		<script src="js/script.js"></script>
+	</body>
+</html>
