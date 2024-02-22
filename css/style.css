@@ -17,7 +17,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #b3b3b3;
+  background-color: #afafaf;
   color: gainsboro;
   font-family: "Roboto", sans-serif;
   font-size: 62.5%;
@@ -114,11 +114,23 @@ body {
   position: absolute;
   display: block;
   width: 250px;
-  min-height: 250px;
-  background-color: #f0f0f0;
+  min-height: 300px;
+  background-color: #d2d2d2;
   color: black;
   border-radius: 10px;
   z-index: 1;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.popup__back-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  margin: 5px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .popup__date-name {
@@ -126,7 +138,7 @@ body {
 }
 
 .popup__window {
-  margin: 3em 0;
+  margin: 3em 0 1em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -153,8 +165,13 @@ body {
 
 .popup__input-container input,
 .popup__input-container button {
-  padding: 0.5em;
-  border-radius: 10px;
+  padding: 0.3em;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.popup__input-container button {
+  cursor: pointer;
 }
 
 .popup__add-input-btn {
@@ -163,6 +180,14 @@ body {
 
 .popup__btn-container button {
   margin: 0 5px;
+  cursor: pointer;
+}
+
+.popup__error {
+  color: red;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .popup__ul-list {
@@ -170,7 +195,7 @@ body {
 }
 
 .popup__li-item {
-  margin: 0.5em 1em;
+  margin: 0.2em 1em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -184,8 +209,42 @@ body {
 }
 
 .popup__li-item button {
-  padding: 5px;
-  border-radius: 5px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.mark-btn {
+  background-color: white;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.mark-btn:hover {
+  background-color: #67ff6e;
+}
+
+.edit-btn {
+  background-color: white;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover {
+  background-color: #fcff55;
+}
+
+.delete-btn {
+  background-color: white;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #ff2a2a;
+}
+
+hr {
+  margin: 0 1em;
 }
 
 .display-class {
@@ -201,6 +260,15 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+@media (max-width: 576px) {
+  .popup__add-input-btn {
+    margin: 1em;
+  }
+  .popup__window {
+    margin: 3em 0 0;
+  }
+}
+
 @media (min-width: 576px) {
   .main__month {
     font-size: 1rem;
@@ -212,6 +280,15 @@ body {
   .main__week-day {
     padding: 0 1em;
   }
+  .popup {
+    width: 350px;
+  }
+  .popup__back-btn {
+    font-size: 1.1rem;
+  }
+  .popup__error {
+    font-size: 1rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -221,6 +298,25 @@ body {
   .main__week {
     width: 75vw;
     font-size: 1.1rem;
+  }
+  .popup {
+    width: 500px;
+  }
+  .popup__input-container input,
+  .popup__input-container button {
+    font-size: 0.9rem;
+  }
+  .popup__back-btn {
+    font-size: 1.2rem;
+  }
+  .popup__error {
+    font-size: 1.1rem;
+  }
+  .popup__li-item {
+    font-size: 1rem;
+  }
+  .popup__li-item button {
+    padding: 4px;
   }
 }
 
@@ -252,6 +348,12 @@ body {
   }
   .main .day {
     padding-bottom: 4em;
+  }
+  .popup {
+    width: 650px;
+  }
+  .popup__back-btn {
+    font-size: 1.3rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -24,7 +24,7 @@ function load() {
 		month: "numeric",
 		day: "numeric",
 	});
-
+	 
 	nameOfMonthAndYear.innerHTML = `${date.toLocaleDateString("en-gb", {
 		month: "long",
 	})} ${year} `;
@@ -40,7 +40,6 @@ function load() {
 			dayLi.addEventListener("click", () => {
 				popUp.classList.remove("display-class");
 				bgShadow.classList.remove("display-class");
-				popUpDateName.textContent = i;
 			});
 		} else if (dayLi.textContent === "") {
 			dayLi.classList.add("empty-field");
@@ -63,22 +62,38 @@ function arrowsAction() {
 }
 arrowsAction();
 
+const dayLi = document.querySelectorAll(".day");
+dayLi.forEach(day => {
+	day.addEventListener("click", e => {
+		console.log(e.target);
+	});
+});
+
 const popUp = document.querySelector(".popup");
+const backBtn = document.querySelector(".popup__back-btn");
 const popUpDateName = document.querySelector(".popup__date-name");
 const popUpInput = document.querySelector(".popup__input");
 const popUpAddBtn = document.querySelector(".popup__add-input-btn");
+const popUpError = document.querySelector(".popup__error");
 const ulList = document.querySelector(".popup__ul-list");
 const bgShadow = document.querySelector(".bg-shadow");
 
 function createLiItemAndUlListInPopUp() {
 	popUpAddBtn.addEventListener("click", () => {
-		const liItem = document.createElement("li");
-		liItem.classList.add('popup__li-item')
+		if (popUpInput.value !== "") {
+			const hr = document.createElement("hr");
+			const liItem = document.createElement("li");
+			liItem.classList.add("popup__li-item");
 
-		liItem.textContent = popUpInput.value;
-		ulList.appendChild(liItem);
+			liItem.textContent = popUpInput.value;
+			ulList.append(liItem, hr);
 
-		createButtonsForLiToPopUp(liItem);
+			popUpInput.value = "";
+			popUpError.textContent = "";
+			createButtonsForLiToPopUp(liItem);
+		} else {
+			popUpError.textContent = "Error! Empty value!";
+		}
 	});
 }
 createLiItemAndUlListInPopUp();
@@ -86,16 +101,27 @@ createLiItemAndUlListInPopUp();
 function createButtonsForLiToPopUp(liItem) {
 	const popUpMarkBtn = document.createElement("button");
 	popUpMarkBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+	popUpMarkBtn.classList.add("mark-btn");
 
 	const popUpEditBtn = document.createElement("button");
 	popUpEditBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
+	popUpEditBtn.classList.add("edit-btn");
 
 	const popUpDeleteBtn = document.createElement("button");
 	popUpDeleteBtn.innerHTML = '<i class="fa-solid fa-x"></i>';
+	popUpDeleteBtn.classList.add("delete-btn");
 
-	const btnContainer = document.createElement('div')
-	btnContainer.classList.add('popup__btn-container')
-	btnContainer.append(popUpMarkBtn, popUpEditBtn, popUpDeleteBtn)
+	const btnContainer = document.createElement("div");
+	btnContainer.classList.add("popup__btn-container");
+	btnContainer.append(popUpMarkBtn, popUpEditBtn, popUpDeleteBtn);
 
 	liItem.append(btnContainer);
 }
+
+function closePopUp() {
+	backBtn.addEventListener("click", () => {
+		popUp.classList.add("display-class");
+		bgShadow.classList.add("display-class");
+	});
+}
+closePopUp();

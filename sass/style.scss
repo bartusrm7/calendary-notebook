@@ -10,7 +10,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: rgb(179, 179, 179);
+	background-color: rgb(175, 175, 175);
 	color: rgb(220, 220, 220);
 	font-family: "Roboto", sans-serif;
 	font-size: 62.5%;
@@ -84,16 +84,26 @@ body {
 	position: absolute;
 	display: block;
 	width: 250px;
-	min-height: 250px;
-	background-color: rgb(240, 240, 240);
+	min-height: 300px;
+	background-color: rgb(210, 210, 210);
 	color: black;
 	border-radius: 10px;
 	z-index: 1;
+	transition: 1s;
+	&__back-btn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 5px;
+		margin: 5px;
+		font-size: 1rem;
+		cursor: pointer;
+	}
 	&__date-name {
 		text-align: center;
 	}
 	&__window {
-		margin: 3em 0;
+		margin: 3em 0 1em;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -105,8 +115,12 @@ body {
 		justify-content: center;
 		input,
 		button {
-			padding: 0.5em;
-			border-radius: 10px;
+			padding: 0.3em;
+			background-color: white;
+			border-radius: 5px;
+		}
+		button {
+			cursor: pointer;
 		}
 	}
 	&__add-input-btn {
@@ -115,25 +129,58 @@ body {
 	&__btn-container {
 		button {
 			margin: 0 5px;
+			cursor: pointer;
 		}
+	}
+	&__error {
+		color: red;
+		font-weight: bold;
+		font-size: 0.9rem;
+		text-align: center;
 	}
 	&__ul-list {
 		display: block;
 	}
 	&__li-item {
-		margin: 0.5em 1em;
+		margin: 0.2em 1em;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		font-size: 0.8rem;
 		button {
-			padding: 5px;
-			border-radius: 5px;
+			padding: 3px;
+			border-radius: 3px;
 			// &:hover{
 
 			// }
 		}
 	}
+}
+
+.mark-btn {
+	background-color: white;
+	transition: background 0.3s;
+	&:hover {
+		background-color: #67ff6e;
+	}
+}
+.edit-btn {
+	background-color: white;
+	transition: background 0.3s;
+	&:hover {
+		background-color: #fcff55;
+	}
+}
+.delete-btn {
+	background-color: white;
+	transition: background 0.3s;
+	&:hover {
+		background-color: #ff2a2a;
+	}
+}
+
+hr {
+	margin: 0 1em;
 }
 
 .display-class {
@@ -147,6 +194,17 @@ body {
 	height: 100%;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 576px) {
+	.popup {
+		&__add-input-btn {
+			margin: 1em;
+		}
+		&__window {
+			margin: 3em 0 0;
+		}
+	}
 }
 
 @media (min-width: 576px) {
@@ -163,7 +221,13 @@ body {
 		}
 	}
 	.popup {
-		
+		width: 350px;
+		&__back-btn {
+			font-size: 1.1rem;
+		}
+		&__error {
+			font-size: 1rem;
+		}
 	}
 }
 @media (min-width: 768px) {
@@ -174,6 +238,27 @@ body {
 		&__week {
 			width: 75vw;
 			font-size: 1.1rem;
+		}
+	}
+	.popup {
+		width: 500px;
+		&__input-container {
+			input,
+			button {
+				font-size: 0.9rem;
+			}
+		}
+		&__back-btn {
+			font-size: 1.2rem;
+		}
+		&__error {
+			font-size: 1.1rem;
+		}
+		&__li-item {
+			font-size: 1rem;
+			button {
+				padding: 4px;
+			}
 		}
 	}
 }
@@ -200,6 +285,12 @@ body {
 		}
 		.day {
 			padding-bottom: 4em;
+		}
+	}
+	.popup {
+		width: 650px;
+		&__back-btn {
+			font-size: 1.3rem;
 		}
 	}
 }
