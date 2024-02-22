@@ -119,8 +119,6 @@ body {
   color: black;
   border-radius: 10px;
   z-index: 1;
-  -webkit-transition: 1s;
-  transition: 1s;
 }
 
 .popup__back-btn {
