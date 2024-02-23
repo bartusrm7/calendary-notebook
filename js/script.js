@@ -1,13 +1,10 @@
-//używać klas
-const dayList = document.querySelector(".main__day-list");
-const nameOfMonthAndYear = document.querySelector(".main__name-of-month-and-year");
-const leftArrow = document.querySelector(".fa-arrow-left");
-const rightArrow = document.querySelector(".fa-arrow-right");
-const weekDaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
 let nav = 0;
 let clicked = null;
 let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem("events")) : [];
+
+const dayList = document.querySelector(".main__day-list");
+const nameOfMonthAndYear = document.querySelector(".main__name-of-month-and-year");
+const weekDaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 const popUp = document.querySelector(".popup");
 const backBtn = document.querySelector(".popup__back-btn");
@@ -18,35 +15,61 @@ const popUpError = document.querySelector(".popup__error");
 const ulList = document.querySelector(".popup__ul-list");
 const bgShadow = document.querySelector(".bg-shadow");
 
-function load() {
-	const dt = new Date();
+function openPopUp() {
+	// clicked = date;
+
+	// const eventForDay = events.find(e => e.date === clicked);
+
+	// if (eventForDay) {
+	// } else {
+	popUp.classList.remove("display-class");
+	bgShadow.classList.remove("display-class");
+}
+
+backBtn.addEventListener("click", () => {
+	popUp.classList.add("display-class");
+	bgShadow.classList.add("display-class");
+});
+
+function addTasksToPopUp() {
+	popUpAddBtn.addEventListener('click', () => {
+		
+	})
+}
+
+function loadCalendar() {
+	const date = new Date();
 
 	if (nav !== 0) {
-		dt.setMonth(new Date().getMonth() + nav);
+		date.setMonth(new Date().getMonth() + nav);
 	}
 
-	const year = dt.getFullYear();
-	const month = dt.getMonth();
-	const firstDayOfMonth = new Date(year, month + 1);
-	const dayInMonth = new Date(year, month + 1, 0).getDate();
+	const day = date.getDay();
+	const month = date.getMonth();
+	const year = date.getFullYear();
 
-	const dateForString = firstDayOfMonth.toLocaleDateString("en-gb", {
+	const firstDayOfMonth = new Date(year, month, 1);
+	const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+	const dateString = firstDayOfMonth.toLocaleDateString("en-gb", {
 		weekday: "long",
 		year: "numeric",
 		month: "numeric",
 		day: "numeric",
 	});
 
-	const paddingDays = weekDaysArray.indexOf(dateForString.split(", ")[0]);
-
-	nameOfMonthAndYear.innerHTML = `${dt.toLocaleDateString("en-gb", {
+	const nameOfMonthAndYear = (document.querySelector(
+		".main__name-of-month-and-year"
+	).innerHTML = `${date.toLocaleDateString("en-gb", {
 		month: "long",
 		year: "numeric",
-	})}`;
+	})}`);
+
+	const paddingDays = weekDaysArray.indexOf(dateString.split(", ")[0]);
 
 	dayList.innerHTML = "";
 
-	for (let i = 1; i <= paddingDays + dayInMonth; i++) {
+	for (let i = 1; i <= paddingDays + daysInMonth; i++) {
 		const dayLi = document.createElement("li");
 		dayLi.classList.add("day");
 
@@ -54,69 +77,21 @@ function load() {
 			dayLi.innerHTML = i - paddingDays;
 
 			dayLi.addEventListener("click", () => {
-				openPopUp(`${i - paddingDays}/${month + 1}/${year}`);
+				openPopUp();
 			});
 		} else {
 			dayLi.classList.add("empty-field");
-			dayLi.classList.remove("day");
 		}
 		dayList.appendChild(dayLi);
 	}
 }
-load();
+loadCalendar();
 
-function arrowsAction() {
-	leftArrow.addEventListener("click", () => {
-		nav--;
-		load();
-	});
-	rightArrow.addEventListener("click", () => {
-		nav++;
-		load();
-	});
-}
-arrowsAction();
-
-function openPopUp(date) {
-	clicked = date;
-
-	const eventForDay = events.find(e => e.date === clicked);
-
-	if (eventForDay) {
-		console.log("click");
-	} else {
-		popUp.classList.remove("display-class");
-		bgShadow.classList.remove("display-class");
-	}
-}
-
-
-
-function createButtonsForLiToPopUp(liItem) {
-	const popUpMarkBtn = document.createElement("button");
-	popUpMarkBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
-	popUpMarkBtn.classList.add("mark-btn");
-
-	const popUpEditBtn = document.createElement("button");
-	popUpEditBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
-	popUpEditBtn.classList.add("edit-btn");
-
-	const popUpDeleteBtn = document.createElement("button");
-	popUpDeleteBtn.innerHTML = '<i class="fa-solid fa-x"></i>';
-	popUpDeleteBtn.classList.add("delete-btn");
-
-	const btnContainer = document.createElement("div");
-	btnContainer.classList.add("popup__btn-container");
-	btnContainer.append(popUpMarkBtn, popUpEditBtn, popUpDeleteBtn);
-
-	liItem.append(btnContainer);
-}
-
-function closePopUp() {
-	backBtn.addEventListener("click", () => {
-		popUp.classList.add("display-class");
-		bgShadow.classList.add("display-class");
-		clicked = null;
-	});
-}
-closePopUp();
+const leftArrow = document.querySelector(".fa-arrow-left").addEventListener("click", () => {
+	nav--;
+	loadCalendar();
+});
+const rightArrow = document.querySelector(".fa-arrow-right").addEventListener("click", () => {
+	nav++;
+	loadCalendar();
+});
