@@ -90,6 +90,36 @@ body {
 	}
 }
 
+.popup {
+	position: absolute;
+	width: 80vw;
+	min-height: 300px;
+	display: none;
+	background-color: #fff;
+	z-index: 1;
+	border-radius: 10px;
+	&__input-container {
+		margin: 2em 0;
+		display: flex;
+		justify-content: center;
+	}
+	&__input {
+	}
+	&__input-error {
+		margin: 2em 0;
+		text-align: center;
+	}
+}
+.bg-shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.75);
+}
+
 @media (min-width: 576px) {
 	.label-of-project {
 		font-size: 1.2rem;
@@ -106,6 +136,9 @@ body {
 		width: 80vw;
 		font-size: 1rem;
 	}
+	.popup {
+		width: 70vw;
+	}
 }
 
 @media (min-width: 768px) {
@@ -121,6 +154,9 @@ body {
 		width: 70vw;
 		font-size: 1.1rem;
 	}
+	.popup {
+		width: 60vw;
+	}
 }
 
 @media (min-width: 992px) {
@@ -135,6 +171,9 @@ body {
 	.main {
 		width: 750px;
 		font-size: 1.2rem;
+	}
+	.popup {
+		width: 50vw;
 	}
 }
 
@@ -174,7 +213,8 @@ body {
 			grid-template-rows: auto;
 			grid-auto-flow: row;
 		}
-		&__day-of-month {
-		}
+	}
+	.popup {
+		width: 650px;
 	}
 }

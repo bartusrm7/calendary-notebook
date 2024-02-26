@@ -3,6 +3,12 @@ let nav = 0;
 const listOfDays = document.querySelector(".main__list-of-days");
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday ", "Sunday "];
 
+const popUp = document.querySelector(".popup");
+const popUpInput = document.querySelector(".popup__input");
+const popUpInputAddBtn = document.querySelector(".popup__input-add-btn");
+const popUpInputError = document.querySelector(".popup__input-error");
+const backgroundShadow = document.querySelector(".bg-shadow");
+
 function loadCalendar() {
 	const date = new Date();
 
