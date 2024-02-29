@@ -86,13 +86,19 @@ function createTasksToDayInCalendar() {
 		const dayClicked = choosenDayDate.innerHTML;
 		task.setAttribute("data-date", dayClicked);
 
+		if (popUpInput.value === "") {
+			popUpInputError.textContent = "Error!";
+			return;
+		}
+		popUpInputError.textContent = "";
+
 		if (!taskByDate[dayClicked]) {
 			taskByDate[dayClicked] = [];
 		}
 		taskByDate[dayClicked].push(popUpInput.value);
 
-		taskList.appendChild(task);
 		popUpInput.value = "";
+		taskList.appendChild(task);
 		createButtonsForTasks(task);
 	});
 }
