@@ -117,6 +117,10 @@ function showTasksForDay(dayClicked) {
 	}
 }
 
+const markTask = () => {};
+const edtiTask = () => {};
+const deleteTask = () => {};
+
 function createButtonsForTasks(task) {
 	const btnContainer = document.createElement("div");
 	btnContainer.classList.add("btn-container");

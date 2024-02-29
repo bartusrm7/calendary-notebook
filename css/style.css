@@ -206,6 +206,11 @@ body {
   cursor: pointer;
 }
 
+.popup .mark-line {
+  background-color: #9c9c9c;
+  text-decoration: line-through;
+}
+
 .bg-shadow {
   position: absolute;
   top: 0;
