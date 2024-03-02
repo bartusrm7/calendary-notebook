@@ -144,10 +144,52 @@ body {
 			text-transform: capitalize;
 		}
 	}
+	&__edit-container {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	&__edit-task {
+		position: absolute;
+		top: 55%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 80vw;
+		min-height: 200px;
+		display: none;
+		flex-wrap: wrap;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: black;
+		color: white;
+		border-radius: 10px;
+		input {
+			padding: 3px;
+			border-radius: 5px;
+		}
+	}
+	&__edit-btn-container {
+		margin: 1em 0;
+		button {
+			padding: 0.1em 1em;
+			margin: 0 0.5em;
+			background-color: white;
+			font-weight: bold;
+			text-transform: uppercase;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	}
 	.btn-container {
 		button {
 			padding: 3px;
 			margin: 0 0.2em;
+			background-color: white;
+			&__edit-task {
+				width: 55vw;
+			}
 			border-radius: 5px;
 			cursor: pointer;
 		}
@@ -155,7 +197,7 @@ body {
 	.mark-btn {
 	}
 	.mark-line {
-		background-color: rgb(156, 156, 156);
+		color: rgb(122, 122, 122);
 		text-decoration: line-through;
 	}
 	.edit-btn {
@@ -174,6 +216,9 @@ body {
 	background-color: rgba(0, 0, 0, 0.75);
 }
 
+.display-flex {
+	display: flex;
+}
 .display-block {
 	display: block;
 }
@@ -201,6 +246,9 @@ body {
 		}
 		&__cancel-btn {
 			font-size: 1rem;
+		}
+		&__edit-task {
+			width: 65vw;
 		}
 	}
 }
@@ -235,6 +283,10 @@ body {
 				padding: 5px;
 			}
 		}
+		&__edit-task {
+			width: 55vw;
+			font-size: 1rem;
+		}
 	}
 }
 
@@ -255,6 +307,9 @@ body {
 		width: 50vw;
 		&__cancel-btn {
 			font-size: 1.3rem;
+		}
+		&__edit-task {
+			width: 45vw;
 		}
 	}
 }
@@ -300,6 +355,9 @@ body {
 		width: 650px;
 		&__choosen-day-date {
 			font-size: 1.1rem;
+		}
+		&__edit-task {
+			width: 600px;
 		}
 	}
 }

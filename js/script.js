@@ -3,21 +3,23 @@ let taskByDate = {};
 
 const listOfDays = document.querySelector(".main__list-of-days");
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday ", "Sunday "];
-
 const popUp = document.querySelector(".popup");
 const choosenDayDate = document.querySelector(".popup__choosen-day-date");
+
 const closePopUpBTN = document.querySelector(".popup__cancel-btn");
 const popUpInput = document.querySelector(".popup__input");
 const popUpInputAddBtn = document.querySelector(".popup__input-add-btn");
 const popUpInputError = document.querySelector(".popup__input-error");
 const taskList = document.querySelector(".popup__task-list");
+const popUpEditTask = document.querySelector(".popup__edit-task");
+const popUpEditInput = document.querySelector(".popup__input-edit-task");
+const popUpEditAcceptBtn = document.querySelector(".popup__accept-edit-btn");
+const popUpEditCancelBtn = document.querySelector(".popup__cancel-edit-btn");
 const backgroundShadow = document.querySelector(".bg-shadow");
 
 function openPopUp(dayClicked) {
 	popUp.classList.add("display-block");
 	backgroundShadow.classList.add("display-block");
-	console.log(dayClicked);
-
 	showTasksForDay(dayClicked);
 }
 
@@ -96,6 +98,8 @@ function createTasksToDayInCalendar() {
 			taskByDate[dayClicked] = [];
 		}
 		taskByDate[dayClicked].push(popUpInput.value);
+		console.log(taskByDate);
+		console.log(taskByDate[dayClicked]);
 
 		popUpInput.value = "";
 		taskList.appendChild(task);
@@ -113,13 +117,41 @@ function showTasksForDay(dayClicked) {
 			newTask.innerHTML = task;
 			taskList.appendChild(newTask);
 			createButtonsForTasks(newTask);
+			console.log(newTask);
 		});
 	}
 }
 
-const markTask = () => {};
-const edtiTask = () => {};
-const deleteTask = () => {};
+const markTask = task => {
+	task.classList.toggle("mark-line");
+};
+
+const openEditTaskWindow = task => {
+	popUpEditTask.classList.add("display-flex");
+	edit(task);
+	closeEditTaskWindow();
+};
+
+const closeEditTaskWindow = () => {
+	popUpEditCancelBtn.addEventListener("click", () => {
+		popUpEditTask.classList.remove("display-flex");
+	});
+};
+
+const deleteTask = task => {
+	taskList.removeChild(task);
+};
+
+const edit = task => {
+	popUpEditInput.value = task.textContent;
+
+	popUpEditAcceptBtn.addEventListener("click", () => {
+		task.textContent = popUpEditInput.value;
+
+		popUpEditTask.classList.remove("display-flex");
+		createButtonsForTasks(task);
+	});
+};
 
 function createButtonsForTasks(task) {
 	const btnContainer = document.createElement("div");
@@ -128,17 +160,25 @@ function createButtonsForTasks(task) {
 	const markBtn = document.createElement("button");
 	markBtn.classList.add("mark-btn");
 	markBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+	markBtn.addEventListener("click", () => markTask(task));
 
 	const editBtn = document.createElement("button");
 	editBtn.classList.add("edit-btn");
 	editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
+	editBtn.addEventListener("click", () => openEditTaskWindow(task));
 
 	const deleteBtn = document.createElement("button");
 	deleteBtn.classList.add("delete-btn");
 	deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+	deleteBtn.addEventListener("click", e => {
+		if (e.target) {
+			deleteTask(task);
+		}
+	});
 
 	btnContainer.append(markBtn, editBtn, deleteBtn);
 	task.append(btnContainer);
+	console.log(task);
 }
 
 function arrowsAction() {
