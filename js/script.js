@@ -1,5 +1,6 @@
 let nav = 0;
 let taskByDate = {};
+let id = 1;
 
 const listOfDays = document.querySelector(".main__list-of-days");
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday ", "Sunday "];
@@ -81,12 +82,12 @@ loadCalendar();
 
 function createTasksToDayInCalendar() {
 	popUpInputAddBtn.addEventListener("click", () => {
-		const task = document.createElement("li");
-		task.classList.add("task");
-		task.innerHTML = popUpInput.value;
-
+		const taskData = {
+			task: popUpInput.value,
+			completed: false,
+			id: id++,
+		};
 		const dayClicked = choosenDayDate.innerHTML;
-		task.setAttribute("data-date", dayClicked);
 
 		if (popUpInput.value === "") {
 			popUpInputError.textContent = "Error!";
@@ -97,13 +98,20 @@ function createTasksToDayInCalendar() {
 		if (!taskByDate[dayClicked]) {
 			taskByDate[dayClicked] = [];
 		}
-		taskByDate[dayClicked].push(popUpInput.value);
-		console.log(taskByDate);
-		console.log(taskByDate[dayClicked]);
+		taskByDate[dayClicked].push(taskData);
 
 		popUpInput.value = "";
-		taskList.appendChild(task);
-		createButtonsForTasks(task);
+		taskList.innerHTML = "";
+
+		taskByDate[dayClicked].forEach(taskData => {
+			const task = document.createElement("li");
+			task.classList.add("task");
+			task.innerHTML = taskData.task;
+			task.setAttribute("data-id", taskData.id);
+
+			taskList.appendChild(task);
+			createButtonsForTasks(task);
+		});
 	});
 }
 createTasksToDayInCalendar();
@@ -117,18 +125,20 @@ function showTasksForDay(dayClicked) {
 			newTask.innerHTML = task;
 			taskList.appendChild(newTask);
 			createButtonsForTasks(newTask);
-			console.log(newTask);
 		});
 	}
 }
 
 const markTask = task => {
 	task.classList.toggle("mark-line");
+	const dayClicked = choosenDayDate.innerHTML;
+	const index = Array.from(taskList.children).indexOf(task);
+	taskByDate[dayClicked][index].completed = task.classList.contains("mark-line");
 };
 
-const openEditTaskWindow = task => {
+const openEditTaskWindow = (task, dayClicked) => {
 	popUpEditTask.classList.add("display-flex");
-	edit(task);
+	edit(task, dayClicked);
 	closeEditTaskWindow();
 };
 
@@ -139,21 +149,28 @@ const closeEditTaskWindow = () => {
 };
 
 const deleteTask = task => {
+	const dayClicked = choosenDayDate.innerHTML;
+	const index = Array.from(taskList.children).indexOf(task);
+	taskByDate[dayClicked].splice(index, 1);
 	taskList.removeChild(task);
 };
 
 const edit = task => {
+	const dayClicked = choosenDayDate.innerHTML;
+	const index = Array.from(taskList.children).indexOf(task);
 	popUpEditInput.value = task.textContent;
 
 	popUpEditAcceptBtn.addEventListener("click", () => {
 		task.textContent = popUpEditInput.value;
+
+		taskByDate[dayClicked][index] = popUpEditInput.value;
 
 		popUpEditTask.classList.remove("display-flex");
 		createButtonsForTasks(task);
 	});
 };
 
-function createButtonsForTasks(task) {
+function createButtonsForTasks(task, dayClicked) {
 	const btnContainer = document.createElement("div");
 	btnContainer.classList.add("btn-container");
 
@@ -165,7 +182,7 @@ function createButtonsForTasks(task) {
 	const editBtn = document.createElement("button");
 	editBtn.classList.add("edit-btn");
 	editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
-	editBtn.addEventListener("click", () => openEditTaskWindow(task));
+	editBtn.addEventListener("click", () => openEditTaskWindow(task, dayClicked));
 
 	const deleteBtn = document.createElement("button");
 	deleteBtn.classList.add("delete-btn");
@@ -178,7 +195,6 @@ function createButtonsForTasks(task) {
 
 	btnContainer.append(markBtn, editBtn, deleteBtn);
 	task.append(btnContainer);
-	console.log(task);
 }
 
 function arrowsAction() {
