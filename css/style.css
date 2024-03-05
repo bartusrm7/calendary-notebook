@@ -199,64 +199,6 @@ body {
   text-transform: capitalize;
 }
 
-.popup__edit-container {
-  position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.popup__edit-task {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 80vw;
-  min-height: 200px;
-  display: none;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: black;
-  color: white;
-  border-radius: 10px;
-}
-
-.popup__edit-task input {
-  padding: 3px;
-  border-radius: 5px;
-}
-
-.popup__edit-btn-container {
-  margin: 1em 0;
-}
-
-.popup__edit-btn-container button {
-  padding: 0.1em 1em;
-  margin: 0 0.5em;
-  background-color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .popup .btn-container button {
   padding: 3px;
   margin: 0 0.2em;

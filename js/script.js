@@ -85,7 +85,6 @@ function createTasksToDayInCalendar() {
 		const taskData = {
 			task: popUpInput.value,
 			completed: false,
-			id: id++,
 		};
 		const dayClicked = choosenDayDate.innerHTML;
 
@@ -94,6 +93,10 @@ function createTasksToDayInCalendar() {
 			return;
 		}
 		popUpInputError.textContent = "";
+
+		if (taskByDate.completed) {
+			task.classList.add("mark-line");
+		}
 
 		if (!taskByDate[dayClicked]) {
 			taskByDate[dayClicked] = [];
@@ -107,7 +110,6 @@ function createTasksToDayInCalendar() {
 			const task = document.createElement("li");
 			task.classList.add("task");
 			task.innerHTML = taskData.task;
-			task.setAttribute("data-id", taskData.id);
 
 			taskList.appendChild(task);
 			createButtonsForTasks(task);
@@ -119,10 +121,13 @@ createTasksToDayInCalendar();
 function showTasksForDay(dayClicked) {
 	taskList.innerHTML = "";
 	if (taskByDate[dayClicked]) {
-		taskByDate[dayClicked].forEach(task => {
+		taskByDate[dayClicked].forEach(taskData => {
 			const newTask = document.createElement("li");
 			newTask.classList.add("task");
-			newTask.innerHTML = task;
+			newTask.innerHTML = taskData.task;
+			if (taskData.completed) {
+				newTask.classList.add("mark-line");
+			}
 			taskList.appendChild(newTask);
 			createButtonsForTasks(newTask);
 		});
@@ -136,18 +141,6 @@ const markTask = task => {
 	taskByDate[dayClicked][index].completed = task.classList.contains("mark-line");
 };
 
-const openEditTaskWindow = (task, dayClicked) => {
-	popUpEditTask.classList.add("display-flex");
-	edit(task, dayClicked);
-	closeEditTaskWindow();
-};
-
-const closeEditTaskWindow = () => {
-	popUpEditCancelBtn.addEventListener("click", () => {
-		popUpEditTask.classList.remove("display-flex");
-	});
-};
-
 const deleteTask = task => {
 	const dayClicked = choosenDayDate.innerHTML;
 	const index = Array.from(taskList.children).indexOf(task);
@@ -155,22 +148,7 @@ const deleteTask = task => {
 	taskList.removeChild(task);
 };
 
-const edit = task => {
-	const dayClicked = choosenDayDate.innerHTML;
-	const index = Array.from(taskList.children).indexOf(task);
-	popUpEditInput.value = task.textContent;
-
-	popUpEditAcceptBtn.addEventListener("click", () => {
-		task.textContent = popUpEditInput.value;
-
-		taskByDate[dayClicked][index] = popUpEditInput.value;
-
-		popUpEditTask.classList.remove("display-flex");
-		createButtonsForTasks(task);
-	});
-};
-
-function createButtonsForTasks(task, dayClicked) {
+function createButtonsForTasks(task) {
 	const btnContainer = document.createElement("div");
 	btnContainer.classList.add("btn-container");
 
@@ -178,11 +156,6 @@ function createButtonsForTasks(task, dayClicked) {
 	markBtn.classList.add("mark-btn");
 	markBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
 	markBtn.addEventListener("click", () => markTask(task));
-
-	const editBtn = document.createElement("button");
-	editBtn.classList.add("edit-btn");
-	editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
-	editBtn.addEventListener("click", () => openEditTaskWindow(task, dayClicked));
 
 	const deleteBtn = document.createElement("button");
 	deleteBtn.classList.add("delete-btn");
@@ -193,7 +166,7 @@ function createButtonsForTasks(task, dayClicked) {
 		}
 	});
 
-	btnContainer.append(markBtn, editBtn, deleteBtn);
+	btnContainer.append(markBtn, deleteBtn);
 	task.append(btnContainer);
 }
 

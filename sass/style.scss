@@ -144,44 +144,6 @@ body {
 			text-transform: capitalize;
 		}
 	}
-	&__edit-container {
-		position: absolute;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	&__edit-task {
-		position: absolute;
-		top: 55%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 80vw;
-		min-height: 200px;
-		display: none;
-		flex-wrap: wrap;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		background-color: black;
-		color: white;
-		border-radius: 10px;
-		input {
-			padding: 3px;
-			border-radius: 5px;
-		}
-	}
-	&__edit-btn-container {
-		margin: 1em 0;
-		button {
-			padding: 0.1em 1em;
-			margin: 0 0.5em;
-			background-color: white;
-			font-weight: bold;
-			text-transform: uppercase;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-	}
 	.btn-container {
 		button {
 			padding: 3px;
@@ -199,8 +161,6 @@ body {
 	.mark-line {
 		color: rgb(122, 122, 122);
 		text-decoration: line-through;
-	}
-	.edit-btn {
 	}
 	.delete-btn {
 	}
