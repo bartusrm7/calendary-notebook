@@ -94,10 +94,6 @@ function createTasksToDayInCalendar() {
 		}
 		popUpInputError.textContent = "";
 
-		if (taskByDate.completed) {
-			task.classList.add("mark-line");
-		}
-
 		if (!taskByDate[dayClicked]) {
 			taskByDate[dayClicked] = [];
 		}
@@ -112,7 +108,13 @@ function createTasksToDayInCalendar() {
 			task.innerHTML = taskData.task;
 
 			taskList.appendChild(task);
-			createButtonsForTasks(task);
+			createButtonsForTasks(task, taskData);
+		});
+		taskByDate[dayClicked].forEach((taskData, index) => {
+			if (taskData.completed) {
+				const taskElement = taskList.children[index];
+				taskElement.classList.add("mark-line");
+			}
 		});
 	});
 }
